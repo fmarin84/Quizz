@@ -1,6 +1,8 @@
 package com.example.quizz.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="answer")
@@ -12,6 +14,13 @@ public class Answer {
 
     @ManyToOne
     private Question question;
+
+    @ManyToMany
+    @JoinTable(name="user_answer",
+            joinColumns = @JoinColumn(name="answer_id"),
+            inverseJoinColumns = @JoinColumn(name="user_id")
+    )
+    private List<User> userList = new ArrayList<>();
 
     private boolean rightWrong;
 
@@ -39,8 +48,6 @@ public class Answer {
     public void setRightWrong(boolean rightWrong) {
         this.rightWrong = rightWrong;
     }
-
-
 
     public Answer() {
     }
