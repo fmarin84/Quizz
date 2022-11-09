@@ -16,14 +16,14 @@ public class QuizzApi {
     @Autowired
     QuizzService quizzService;
 
-    @GetMapping("personnes")
+    @GetMapping("quizz")
     public List<Quizz> getAllQuizz(){
 
         return quizzService.getAllQuizz();
     }
 
     @GetMapping("quizz/{id}")
-    public ResponseEntity getPersonne(@PathVariable("id") int id){
+    public ResponseEntity getQuizz(@PathVariable("id") int id){
         Optional<Quizz> op = quizzService.getQuizz(id);
         if(op.isEmpty()){
             return ResponseEntity.notFound().build();
