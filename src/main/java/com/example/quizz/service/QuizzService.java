@@ -1,4 +1,4 @@
 package com.example.quizz.service;
 
-public class QuizzMvcController {
+public class QuizzService {
 }
