@@ -16,7 +16,7 @@ public class Quizz {
     private String title;
 
     @OneToMany(fetch=FetchType.EAGER)
-    @JoinColumn(name="question_id ")
+    @JoinColumn(name="id")
     private List<Question> questions = new ArrayList<>();
 
     public Quizz(String title) {
