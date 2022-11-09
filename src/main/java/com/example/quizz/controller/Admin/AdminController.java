@@ -30,4 +30,5 @@ public class AdminController {
         model.addAttribute("quizz", quizzService.getAllQuizz());
         return "quizz.html";
     }
+
 }

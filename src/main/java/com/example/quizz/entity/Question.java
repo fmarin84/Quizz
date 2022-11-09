@@ -1,6 +1,8 @@
 package com.example.quizz.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="question")
@@ -11,8 +13,12 @@ public class Question {
 
     private String title;
 
-    @ManyToOne
+    @ManyToOne()
     private Quizz quizz;
+
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name="question_id")
+    private List<Answer> answers = new ArrayList<>();
 
     public Question() {
     }

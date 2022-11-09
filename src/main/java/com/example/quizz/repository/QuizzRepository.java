@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface QuizzRepository extends JpaRepository<Quizz, Integer> {
 
-    public List<Quizz> findAllByTitle(String nom);
+    List<Quizz> findAllByTitle(String nom);
 }
