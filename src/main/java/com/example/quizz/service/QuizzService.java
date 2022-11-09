@@ -14,9 +14,9 @@ public class QuizzService {
     @Autowired
     private QuizzRepository quizzRepository;
 
-    public List<Quizz> getAllQuizz(){ return quizzRepository.findAll();}
+    public List<Quizz> getAll(){ return quizzRepository.findAll();}
 
-    public void addQuizz(Quizz quizz){
+    public void add(Quizz quizz){
         quizzRepository.save(quizz);
     }
 

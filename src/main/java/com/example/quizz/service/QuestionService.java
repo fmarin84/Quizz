@@ -14,6 +14,12 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    public List<Question> getAll(){ return questionRepository.findAll();}
+
+    public void add(Question question){
+        questionRepository.save(question);
+    }
+
     public List<Question> getQuestions(int id){
         return questionRepository.findAllByQuizz_Id(id);
     }
