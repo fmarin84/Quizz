@@ -17,9 +17,9 @@ public class QuizzApi {
     QuizzService quizzService;
 
     @GetMapping("quizz")
-    public List<Quizz> getAllQuizz(){
+    public List<Quizz> getAll(){
 
-        return quizzService.getAllQuizz();
+        return quizzService.getAll();
     }
 
     @GetMapping("quizz/{id}")

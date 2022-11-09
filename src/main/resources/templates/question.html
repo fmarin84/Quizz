@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Question</h1>
+
+<p th:text="${ questions.size() }"></p>
+
+<p th:if="${ questions.size() == 0 }">Aucune question</p>
+
+<table th:if="${ questions.size() > 0 }">
+    <tr th:each="q : ${ questions }">
+        <td th:text="${ q.title }"></td>
+    </tr>
+</table>
+
+<form action="newquestion" method="POST">
+    <label>Titre:</label><input type="text" name="title"/><br/>
+    <label>Quizz:</label>
+    <select name="quizz" id="quizz">
+        <option th:each="q : ${ quizz }" th:value="${q.id}" th:text="${q.title}">
+        </option>
+    </select>
+    <br/>
+    <input type="submit" value="Ajouter">
+</form>
+</body>
+</html>
