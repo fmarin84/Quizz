@@ -1,10 +1,39 @@
 package com.example.quizz.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.quizz.entity.Quizz;
+import com.example.quizz.service.QuizzService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api")
 public class QuizzApi {
 
+    @Autowired
+    QuizzService quizzService;
+
+    @GetMapping("personnes")
+    public List<Quizz> getAllQuizz(){
+
+        return quizzService.getAllQuizz();
+    }
+
+    @GetMapping("quizz/{id}")
+    public ResponseEntity getPersonne(@PathVariable("id") int id){
+        Optional<Quizz> op = quizzService.getQuizz(id);
+        if(op.isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(op.get());
+        }
+    }
+
+    @GetMapping("findbytitle")
+    public List<Quizz> findByTitle(@RequestParam(value = "title", required = false) String title){
+        return quizzService.findByTitle(title);
+    }
 }

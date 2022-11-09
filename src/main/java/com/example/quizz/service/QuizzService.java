@@ -40,7 +40,7 @@ public class QuizzService {
         }
     }
 
-    public List<Quizz> findByNom(String title){
+    public List<Quizz> findByTitle(String title){
         return quizzRepository.findAllByTitle(title);
     }
 
