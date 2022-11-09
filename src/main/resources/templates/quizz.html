@@ -14,10 +14,22 @@
 <table th:if="${ quizz.size() > 0 }">
     <tr th:each="q : ${ quizz }">
         <td th:text="${ q.title }"></td>
+
+        <td>
+            <form th:action="'/updatequizz/' + ${q.id}"  method="GET">
+                <input type="submit" value="modifier">
+            </form>
+        </td>
+
+        <td>
+            <form th:action="'/deleteQuizz/' + ${q.id}"  method="POST">
+                <input type="submit" value="supprimer">
+            </form>
+        </td>
     </tr>
 </table>
 
-<form action="newquizz" method="POST">
+<form action="/newquizz" method="POST">
     <label>Titre:</label><input type="text" name="title"/><br/>
     <input type="submit" value="Ajouter">
 </form>

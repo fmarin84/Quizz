@@ -21,37 +21,44 @@ public class AdminController {
 
     @GetMapping("quizz")
     public String getQuizzView(Model model){
-
         model.addAttribute("quizz", quizzService.getAll());
+
         return "quizz.html";
     }
 
     @PostMapping("newquizz")
     public String add(Quizz quizz, Model model){
-
         quizzService.add(quizz);
         model.addAttribute("quizz", quizzService.getAll());
+
         return "quizz.html";
     }
 
     @GetMapping("updatequizz/{id}")
     public String getUpdateQuizzView(@PathVariable("id") int id, Model model){
-
         model.addAttribute("quizz", quizzService.getQuizz(id).get());
+
         return "updateQuizz.html";
     }
 
     @PostMapping("updatequizz")
     public String update(Quizz quizz, Model model) throws Exception {
-
         quizzService.update(quizz.getId(), quizz);
         model.addAttribute("quizz", quizzService.getAll());
+
+        return "quizz.html";
+    }
+
+    @PostMapping("deleteQuizz/{id}")
+    public String deleteQuizz(@PathVariable("id") int id, Model model){
+        quizzService.deleteQuizz(id);
+        model.addAttribute("quizz", quizzService.getAll());
+
         return "quizz.html";
     }
 
     @GetMapping("question")
     public String getQuestionView(Model model){
-
         model.addAttribute("questions", questionService.getAll());
         model.addAttribute("quizz", quizzService.getAll());
 
@@ -60,11 +67,10 @@ public class AdminController {
 
     @PostMapping("newquestion")
     public String addQuestion(Question question, Model model){
-
         questionService.add(question);
-
         model.addAttribute("questions", questionService.getAll());
         model.addAttribute("quizz", quizzService.getAll());
+
         return "question.html";
     }
 
