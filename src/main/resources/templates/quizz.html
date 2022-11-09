@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Quizz</h1>
+
+<p th:text="${ quizz.size() }"></p>
+
+<p th:if="${ quizz.size() == 0 }">Aucun quizz</p>
+
+<table th:if="${ quizz.size() > 0 }">
+    <tr th:each="q : ${ quizz }">
+        <td th:text="${ q.title }"></td>
+    </tr>
+</table>
+
+<form action="newquizz" method="POST">
+    <label>Titre:</label><input type="text" name="title"/><br/>
+    <input type="submit" value="Ajouter">
+</form>
+</body>
+</html>
