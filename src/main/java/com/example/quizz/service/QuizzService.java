@@ -26,14 +26,14 @@ public class QuizzService {
         return quizzRepository.findById(id);
     }
 
-    public void updateQuizz(int id, Quizz quizz) throws Exception{
+    public void update(int id, Quizz quizz) throws Exception{
         if(id != quizz.getId())
             throw new Exception();
 
         Optional<Quizz> q = quizzRepository.findById(id);
         if(q.isPresent()) {
             //TODO Faire une fonction
-            quizz.setTitle(q.get().getTitle());
+            q.get().setTitle(quizz.getTitle());
             quizzRepository.save(quizz);
         } else {
             throw new Exception();

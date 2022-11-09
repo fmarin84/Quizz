@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -17,7 +18,6 @@ public class AdminController {
     private QuizzService quizzService;
     @Autowired
     private QuestionService questionService;
-
 
     @GetMapping("quizz")
     public String getQuizzView(Model model){
@@ -30,11 +30,24 @@ public class AdminController {
     public String add(Quizz quizz, Model model){
 
         quizzService.add(quizz);
-
         model.addAttribute("quizz", quizzService.getAll());
         return "quizz.html";
     }
 
+    @GetMapping("updatequizz/{id}")
+    public String getUpdateQuizzView(@PathVariable("id") int id, Model model){
+
+        model.addAttribute("quizz", quizzService.getQuizz(id).get());
+        return "updateQuizz.html";
+    }
+
+    @PostMapping("updatequizz")
+    public String update(Quizz quizz, Model model) throws Exception {
+
+        quizzService.update(quizz.getId(), quizz);
+        model.addAttribute("quizz", quizzService.getAll());
+        return "quizz.html";
+    }
 
     @GetMapping("question")
     public String getQuestionView(Model model){
@@ -54,6 +67,5 @@ public class AdminController {
         model.addAttribute("quizz", quizzService.getAll());
         return "question.html";
     }
-
 
 }
