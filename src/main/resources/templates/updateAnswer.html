@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Mise à jour d'une reponse</h1>
+
+<form action="/updateAnswer" method="POST">
+    <input type="text" name="id" style="display: none;" th:value="${ answer.id }"/>
+    <label>Titre:</label><input type="text" name="title" th:value="${ answer.title }"/><br/>
+
+    <label>Quizz:</label>
+    <select name="question" id="question">
+        <option th:each="q : ${ questions }" th:value="${q.id}" th:text="${q.title}">
+        </option>
+    </select>
+
+    <br/>
+    <label>Vrai ?</label>
+
+    <p th:if="${ answer.isRightWrong() == true }"><input type="checkbox" name="rightWrong" checked></p>
+    <p th:if="${ answer.isRightWrong() == false }"><input type="checkbox" name="rightWrong" ></p>
+
+    <input type="submit" value="Modifier">
+</form>
+</body>
+</html>

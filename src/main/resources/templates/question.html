@@ -7,6 +7,16 @@
 <body>
 <h1>Question</h1>
 
+
+<form action="/quizz"  method="GET">
+    <input type="submit" value="Quizz">
+</form>
+
+<form action="/answer"  method="GET">
+    <input type="submit" value="Answer">
+</form>
+
+
 <p th:text="${ questions.size() }"></p>
 
 <p th:if="${ questions.size() == 0 }">Aucune question</p>

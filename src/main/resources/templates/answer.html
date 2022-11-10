@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Answer</h1>
+
+<form action="/quizz"  method="GET">
+    <input type="submit" value="Quizz">
+</form>
+
+<form action="/question"  method="GET">
+    <input type="submit" value="Question">
+</form>
+
+<p th:text="${ answers.size() }"></p>
+
+<p th:if="${ answers.size() == 0 }">Aucune question</p>
+
+<table th:if="${ answers.size() > 0 }">
+    <thead>
+    <th>Title</th>
+    <th>Question</th>
+    <th>Quizz</th>
+    <th>Valide</th>
+    <th>Action</th>
+    </thead>
+    <tr th:each="a : ${ answers }">
+        <td th:text="${ a.title }"></td>
+
+        <td th:text="${ a.question.title }"></td>
+
+        <td th:text="${ a.question.quizz.title }"></td>
+
+        <td th:text="${ a.rightWrong }"></td>
+
+        <td>
+            <form th:action="'/updateAnswer/' + ${a.id}"  method="GET">
+                <input type="submit" value="modifier">
+            </form>
+        </td>
+
+        <td>
+            <form th:action="'/deleteAnswer/' + ${a.id}"  method="POST">
+                <input type="submit" value="supprimer">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<form action="/newAnswer" method="POST">
+    <label>Titre:</label><input type="text" name="title"/><br/>
+    <label>Question:</label>
+    <select name="question" id="question">
+        <option th:each="q : ${ questions }" th:value="${q.id}" th:text="${q.title}">
+        </option>
+    </select>
+    <br/>
+    <label>Vrai ?</label>
+    <input type="checkbox" name="rightWrong" id="rightWrong">
+<!--    value="checked"-->
+
+    <input type="submit" value="Ajouter">
+</form>
+</body>
+</html>
