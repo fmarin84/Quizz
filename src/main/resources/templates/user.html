@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Utilisateur</h1>
+
+<p th:text="${ users.size() }"></p>
+
+<p th:if="${ users.size() == 0 }">Aucun utilisateur</p>
+
+<form action="/quizz"  method="GET">
+    <input type="submit" value="Quizz">
+</form>
+
+<form action="/question"  method="GET">
+    <input type="submit" value="Question">
+</form>
+
+<form action="/answer"  method="GET">
+    <input type="submit" value="Answer">
+</form>
+
+<table th:if="${ users.size() > 0 }">
+    <tr th:each="u : ${ users }">
+        <td th:text="${ u.firstName }"></td>
+        <td th:text="${ u.lastName }"></td>
+
+        <td>
+            <form th:action="'/updateUser/' + ${u.id}"  method="GET">
+                <input type="submit" value="modifier">
+            </form>
+        </td>
+
+        <td>
+            <form th:action="'/deleteUser/' + ${u.id}"  method="POST">
+                <input type="submit" value="supprimer">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<form action="/newUser" method="POST">
+    <label>Nom:</label><input type="text" name="firstName"/><br/>
+    <label>Prénom:</label><input type="text" name="lastName"/><br/>
+    <input type="submit" value="Ajouter">
+</form>
+</body>
+</html>

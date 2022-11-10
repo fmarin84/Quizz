@@ -7,6 +7,7 @@ import com.example.quizz.entity.User;
 import com.example.quizz.service.AnswerService;
 import com.example.quizz.service.QuestionService;
 import com.example.quizz.service.QuizzService;
+import com.example.quizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +25,8 @@ public class AdminController {
     @Autowired
     private QuestionService questionService;
 
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private AnswerService answerService;
@@ -113,20 +114,44 @@ public class AdminController {
     }
 
     /* User */
-//    @GetMapping("user")
-//    public String getUserView(Model model){
-//        model.addAttribute("users", userService.getAll());
-//
-//        return "user.html";
-//    }
-//
-//    @PostMapping("newUser")
-//    public String add(User user, Model model){
-//        userService.add(user);
-//        model.addAttribute("users", userService.getAll());
-//
-//        return "user.html";
-//    }
+    @GetMapping("user")
+    public String getUserView(Model model){
+        model.addAttribute("users", userService.getAll());
+
+        return "user.html";
+    }
+
+    @PostMapping("newUser")
+    public String add(User user, Model model){
+        userService.add(user);
+        model.addAttribute("users", userService.getAll());
+
+        return "user.html";
+    }
+
+    @GetMapping("updateUser/{id}")
+    public String getUpdateUserView(@PathVariable("id") int id, Model model){
+        model.addAttribute("user", userService.getUser(id).get());
+
+        return "updateUser.html";
+    }
+
+    @PostMapping("updateUser")
+    public String updateUser(User user, Model model) throws Exception {
+        userService.update(user.getId(), user);
+        model.addAttribute("users", userService.getAll());
+
+        return "user.html";
+    }
+
+    @PostMapping("deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") int id, Model model){
+        userService.deleteUser(id);
+        model.addAttribute("users", userService.getAll());
+        model.addAttribute("questions", questionService.getAll());
+
+        return "user.html";
+    }
 
     /* Answer */
     @GetMapping("answer")

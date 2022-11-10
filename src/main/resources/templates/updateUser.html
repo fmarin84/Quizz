@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Mise à jour d'un utilisateur</h1>
+
+<form action="/updateUser" method="POST">
+    <input type="text" name="id" style="display: none;" th:value="${ user.id }"/>
+    <label>Nom:</label><input type="text" name="firstName" th:value="${ user.firstName }"/><br/>
+    <label>Prénom:</label><input type="text" name="lastName"  th:value="${ user.lastName }"/><br/>
+    <input type="submit" value="Modifier">
+</form>
+</body>
+</html>

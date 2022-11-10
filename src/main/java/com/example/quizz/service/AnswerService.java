@@ -33,8 +33,8 @@ public class AnswerService {
     //    return answerRepository.findByUser_Id(id);
     //}
 
-    public void add(Answer anser){
-        answerRepository.save(anser);
+    public void add(Answer answer){
+        answerRepository.save(answer);
     }
 
     public List<Answer> getAll(){ return answerRepository.findAll();}
