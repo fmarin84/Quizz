@@ -28,4 +28,22 @@ public class QuestionService {
         return questionRepository.findById(id);
     }
 
+
+    public void update(int id, Question question) throws Exception{
+        if(id != question.getId())
+            throw new Exception();
+
+        Optional<Question> q = questionRepository.findById(id);
+        if(q.isPresent()) {
+            //TODO Faire une fonction
+            q.get().setTitle(question.getTitle());
+            questionRepository.save(question);
+        } else {
+            throw new Exception();
+        }
+    }
+
+    public void deleteQuestion(int id) { questionRepository.deleteById(id);}
+
+
 }
