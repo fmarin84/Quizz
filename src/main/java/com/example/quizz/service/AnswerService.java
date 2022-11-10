@@ -1,6 +1,7 @@
 package com.example.quizz.service;
 
 import com.example.quizz.entity.Answer;
+import com.example.quizz.entity.Question;
 import com.example.quizz.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,4 +59,11 @@ public class AnswerService {
             throw new Exception();
         }
     }
+
+
+    public Optional<Answer> getOneByTitle(String title){
+        return answerRepository.findByTitle(title);
+    }
+
+    public long countDistinctByIdNotNull() { return answerRepository.countDistinctByIdNotNull();}
 }

@@ -45,5 +45,9 @@ public class QuestionService {
 
     public void deleteQuestion(int id) { questionRepository.deleteById(id);}
 
+    public Optional<Question> getOneByTitle(String title){
+        return questionRepository.findByTitle(title);
+    }
 
+    public long countDistinctByIdNotNull() { return questionRepository.countDistinctByIdNotNull();}
 }

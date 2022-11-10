@@ -40,6 +40,8 @@ public class QuizzService {
         }
     }
 
+    public long countDistinctByIdNotNull() { return quizzRepository.countDistinctByIdNotNull();}
+
     public List<Quizz> findByTitle(String title){
         return quizzRepository.findAllByTitle(title);
     }

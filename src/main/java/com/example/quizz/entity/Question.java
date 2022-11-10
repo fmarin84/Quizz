@@ -50,4 +50,11 @@ public class Question {
     public void setQuizz(Quizz quizz) {
         this.quizz = quizz;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }

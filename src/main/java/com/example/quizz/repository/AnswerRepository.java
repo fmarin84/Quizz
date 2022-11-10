@@ -1,6 +1,7 @@
 package com.example.quizz.repository;
 
 import com.example.quizz.entity.Answer;
+import com.example.quizz.entity.Question;
 import com.example.quizz.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +20,7 @@ public interface AnswerRepository  extends JpaRepository<Answer, Integer> {
     Answer findByQuestion_IdAndRightWrongTrue(@NonNull Integer id);
 
     //List<Answer> findByUser_Id(@NonNull Integer id);
+    Optional<Answer> findByTitle(String nom);
 
+    long countDistinctByIdNotNull();
 }
