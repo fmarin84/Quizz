@@ -12,8 +12,9 @@ public class Quizz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
+    @Column(name="title",unique = true,nullable = false,length = 50)
     private String title;
+
 
     @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name="quizz_id")
@@ -40,6 +41,13 @@ public class Quizz {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     @Override

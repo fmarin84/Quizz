@@ -43,5 +43,7 @@ public class QuizzService {
     public List<Quizz> findByTitle(String title){
         return quizzRepository.findAllByTitle(title);
     }
-
+    public Optional<Quizz> getOneByTitle(String title){
+        return quizzRepository.findByTitle(title);
+    }
 }

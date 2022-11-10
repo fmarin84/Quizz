@@ -15,12 +15,28 @@ public class Answer {
     @ManyToOne
     private Question question;
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     @ManyToMany
     @JoinTable(name="user_answer",
             joinColumns = @JoinColumn(name="answer_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
     private List<User> userList = new ArrayList<>();
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     private boolean rightWrong;
 
@@ -56,6 +72,12 @@ public class Answer {
         this.title = title;
     }
 
-
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "title='" + title + '\'' +
+                "list='" + userList.size() + '\'' +
+                '}';
+    }
 
 }
