@@ -2,6 +2,7 @@ package com.example.quizz.controller.Admin;
 
 import com.example.quizz.entity.Question;
 import com.example.quizz.entity.Quizz;
+import com.example.quizz.entity.User;
 import com.example.quizz.service.QuestionService;
 import com.example.quizz.service.QuizzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class AdminController {
     @Autowired
     private QuestionService questionService;
 
+    /*  Quizz */
     @GetMapping("quizz")
     public String getQuizzView(Model model){
         model.addAttribute("quizz", quizzService.getAll());
@@ -57,6 +59,8 @@ public class AdminController {
         return "quizz.html";
     }
 
+
+    /*  Question */
     @GetMapping("question")
     public String getQuestionView(Model model){
         model.addAttribute("questions", questionService.getAll());
@@ -74,4 +78,31 @@ public class AdminController {
         return "question.html";
     }
 
+    @GetMapping("updateQuestion/{id}")
+    public String getUpdateQuestionView(@PathVariable("id") int id, Model model){
+        model.addAttribute("question", questionService.getQuestion(id).get());
+        model.addAttribute("quizz", quizzService.getAll());
+
+        return "updateQuestion.html";
+    }
+
+    @PostMapping("updateQuestion")
+    public String updateQuestion(Question question, Model model) throws Exception {
+        questionService.update(question.getId(), question);
+        model.addAttribute("questions", questionService.getAll());
+
+        return "question.html";
+    }
+
+    @PostMapping("deleteQuestion/{id}")
+    public String deleteQuestion(@PathVariable("id") int id, Model model){
+        questionService.deleteQuestion(id);
+        model.addAttribute("questions", questionService.getAll());
+
+        return "question.html";
+    }
+
+
+
+    
 }

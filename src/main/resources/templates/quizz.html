@@ -11,6 +11,10 @@
 
 <p th:if="${ quizz.size() == 0 }">Aucun quizz</p>
 
+<form action="/question"  method="GET">
+    <input type="submit" value="Question">
+</form>
+
 <table th:if="${ quizz.size() > 0 }">
     <tr th:each="q : ${ quizz }">
         <td th:text="${ q.title }"></td>
