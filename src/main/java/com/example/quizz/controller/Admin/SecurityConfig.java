@@ -26,8 +26,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // The order of the rules matters and the more specific rules should go first.
                 // ne pas oublier le / devant les URLs
                 .antMatchers("/", "/index.html").permitAll()
-                .antMatchers("/", "/index.html", "/user/registration").permitAll()
-                .antMatchers("/", "/index.html", "/api/users").permitAll()
+                .antMatchers("/", "/api/**").permitAll()
+
+//                .antMatchers("/", "/index.html", "/api/questions/1").permitAll()
+//                .antMatchers("/", "/index.html", "/api/user/login").permitAll()
+//
+//
+//                .antMatchers("/", "/index.html", "/api/user").permitAll()
+//                .antMatchers("/", "/index.html", "/api/quizz").permitAll()
+//                .antMatchers("/", "/index.html", "/api/question").permitAll()
+//                .antMatchers("/", "/index.html", "/api/answer").permitAll()
+
+
                 .anyRequest().authenticated()
 
                 // Authentication mode:
@@ -35,9 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Authentication mode:
                 .and().httpBasic()        // for web API auth
-
-                // Authentication mode:
-                .and().formLogin()           //  redirect to /login HTML page and then to the resource after successfull authentication
 
                 // disable csrf Protection:
                 .and().csrf().disable()

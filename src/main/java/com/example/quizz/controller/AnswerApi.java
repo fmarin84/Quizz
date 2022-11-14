@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AnswerApi {
     @Autowired
     AnswerService answerService;

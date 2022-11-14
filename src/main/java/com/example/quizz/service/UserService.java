@@ -23,20 +23,25 @@ public class UserService {
 
     public User login(String email, String password) throws Exception {
 
-        String pass = new BCryptPasswordEncoder().encode(password);
         User user = userRepository.findByEmail(email).get();
-        if (user.getPassword() != pass){
+
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (encoder.matches(password, user.getPassword())){
+            return user;
+        }else{
             throw new Exception();
         }
 
-        return user;
+
     }
 
     public User registerNewUserAccount(UserDTO userDTO) throws Exception{
 
-        if(!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
-            throw new Exception();
-        }
+         //if(!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
+         //    throw new Exception();
+         //}
 
         User u = new User();
         u.setEnabled(1);

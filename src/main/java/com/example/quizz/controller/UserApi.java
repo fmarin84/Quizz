@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UserApi {
     @Autowired
     UserService userService;
@@ -24,14 +24,11 @@ public class UserApi {
     }
 
     @PostMapping("user/login")
-    public ResponseEntity Login(@RequestParam String email, @RequestParam String password, BindingResult result) throws Exception {
+    public ResponseEntity Login(@RequestBody UserDTO user) throws Exception {
 
-        if (result.hasErrors()) {
-            return ResponseEntity.status(400).body(result.getAllErrors().toArray());
-        }
-        User user = userService.login(email, password);
+        User u = userService.login(user.getEmail(), user.getPassword());
 
-        return ResponseEntity.ok().body(user);
+        return ResponseEntity.ok().body(u);
     }
 
     @GetMapping("users")
