@@ -19,8 +19,9 @@ public interface AnswerRepository  extends JpaRepository<Answer, Integer> {
 
     Answer findByQuestion_IdAndRightWrongTrue(@NonNull Integer id);
 
-    //List<Answer> findByUser_Id(@NonNull Integer id);
     Optional<Answer> findByTitle(String nom);
-
+    Optional<Answer> findOneById(int id);
     long countDistinctByIdNotNull();
+
+
 }

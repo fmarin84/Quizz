@@ -18,7 +18,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public Optional<User> getById(int id){
-        return userRepository.findById(id);
+        return userRepository.findOneById(id);
     }
 
     public User postUser(User user) { return userRepository.save(user); }
@@ -54,7 +54,7 @@ public class UserService {
     public void deleteUser(int id) { userRepository.deleteById(id);}
 
     public Optional<User> getUser(int id){
-        return userRepository.findById(id);
+        return userRepository.findOneById(id);
     }
 
     public void update(int id, User user) throws Exception{
@@ -66,7 +66,7 @@ public class UserService {
         if(id != user.getId())
             throw new Exception();
 
-        Optional<User> u = userRepository.findById(id);
+        Optional<User> u = userRepository.findOneById(id);
         if(u.isPresent()) {
             //TODO Faire une fonction
             u.get().setFirstName(user.getFirstName());

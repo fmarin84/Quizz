@@ -1,5 +1,7 @@
 package com.example.quizz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Answer {
     private String title;
 
     @ManyToOne
+    @JsonIgnore
     private Question question;
 
     public Question getQuestion() {
@@ -28,6 +31,7 @@ public class Answer {
             joinColumns = @JoinColumn(name="answer_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
+
     private List<User> userList = new ArrayList<>();
 
     public List<User> getUserList() {

@@ -1,5 +1,6 @@
 package com.example.quizz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class User {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="answer_id")
     )
+    @JsonIgnore
     private List<Answer> answerList = new ArrayList<>();
 
 

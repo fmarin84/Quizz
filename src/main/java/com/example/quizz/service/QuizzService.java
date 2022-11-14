@@ -23,14 +23,14 @@ public class QuizzService {
     public void deleteQuizz(int id) { quizzRepository.deleteById(id);}
 
     public Optional<Quizz> getQuizz(int id){
-        return quizzRepository.findById(id);
+        return quizzRepository.findOneById(id);
     }
 
     public void update(int id, Quizz quizz) throws Exception{
         if(id != quizz.getId())
             throw new Exception();
 
-        Optional<Quizz> q = quizzRepository.findById(id);
+        Optional<Quizz> q = quizzRepository.findOneById(id);
         if(q.isPresent()) {
             //TODO Faire une fonction
             q.get().setTitle(quizz.getTitle());

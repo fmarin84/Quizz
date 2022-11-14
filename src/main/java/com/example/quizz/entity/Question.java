@@ -1,5 +1,7 @@
 package com.example.quizz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,10 @@ public class Question {
     private String title;
 
     @ManyToOne()
+    @JsonIgnore
     private Quizz quizz;
+
+
 
     @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name="question_id")
@@ -50,7 +55,13 @@ public class Question {
     public void setQuizz(Quizz quizz) {
         this.quizz = quizz;
     }
+    public List<Answer> getAnswers() {
+        return answers;
+    }
 
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
     @Override
     public String toString() {
         return "Question{" +

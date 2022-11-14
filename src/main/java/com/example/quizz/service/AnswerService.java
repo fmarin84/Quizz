@@ -24,7 +24,7 @@ public class AnswerService {
     }
 
     public Optional<Answer> getById(int id){
-        return answerRepository.findById(id);
+        return answerRepository.findOneById(id);
     }
 
     public Answer postAnswer(Answer answer) { return answerRepository.save(answer); }
@@ -42,14 +42,14 @@ public class AnswerService {
     public void deleteAnswer(int id) { answerRepository.deleteById(id);}
 
     public Optional<Answer> getAnswer(int id){
-        return answerRepository.findById(id);
+        return answerRepository.findOneById(id);
     }
 
     public void update(int id, Answer answer) throws Exception{
         if(id != answer.getId())
             throw new Exception();
 
-        Optional<Answer> q = answerRepository.findById(id);
+        Optional<Answer> q = answerRepository.findOneById(id);
         if(q.isPresent()) {
             //TODO Faire une fonction
             q.get().setTitle(answer.getTitle());

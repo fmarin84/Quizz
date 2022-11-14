@@ -10,8 +10,10 @@ import java.util.Optional;
 
 @Repository
 public interface QuizzRepository extends JpaRepository<Quizz, Integer> {
+    List<Quizz> findAll();
     List<Quizz> findAllByTitle(String nom);
     Optional<Quizz> findByTitle(String nom);
+    Optional<Quizz> findOneById(int id);
 
     long countDistinctByIdNotNull();
 

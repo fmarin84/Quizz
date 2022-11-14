@@ -13,6 +13,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     List<Question> findAllByQuizz_Id(int id);
 
     Optional<Question> findByTitle(String nom);
+    Optional<Question> findOneById(int id);
 
     long countDistinctByIdNotNull();
 }
