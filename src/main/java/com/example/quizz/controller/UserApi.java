@@ -23,7 +23,7 @@ public class UserApi {
         return user;
     }
 
-    @GetMapping("user")
+    @PostMapping("user/login")
     public ResponseEntity Login(@RequestParam String email, @RequestParam String password, BindingResult result) throws Exception {
 
         if (result.hasErrors()) {
