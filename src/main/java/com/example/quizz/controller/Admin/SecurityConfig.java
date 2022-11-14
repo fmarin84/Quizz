@@ -27,13 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // ne pas oublier le / devant les URLs
                 .antMatchers("/", "/index.html").permitAll()
                 .antMatchers("/", "/index.html", "/user/registration").permitAll()
+                .antMatchers("/", "/index.html", "/api/users").permitAll()
                 .anyRequest().authenticated()
 
                 // Authentication mode:
-                .and().formLogin()           //  redirect to /login HTML page and then to the resource after successfull authentication
+                .and().httpBasic()        // for web API auth
 
                 // Authentication mode:
-                .and().httpBasic()        // for web API auth
+                .and().formLogin()           //  redirect to /login HTML page and then to the resource after successfull authentication
 
                 // disable csrf Protection:
                 .and().csrf().disable()
