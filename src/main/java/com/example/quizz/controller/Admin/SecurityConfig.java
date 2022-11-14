@@ -31,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 // Authentication mode:
+                .and().formLogin()           //  redirect to /login HTML page and then to the resource after successfull authentication
+
+                // Authentication mode:
                 .and().httpBasic()        // for web API auth
 
                 // Authentication mode:
