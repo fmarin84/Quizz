@@ -26,17 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // The order of the rules matters and the more specific rules should go first.
                 // ne pas oublier le / devant les URLs
                 .antMatchers("/", "/index.html").permitAll()
+                .antMatchers("/", "/user/registration").permitAll()
                 .antMatchers("/", "/api/**").permitAll()
-
-//                .antMatchers("/", "/index.html", "/api/questions/1").permitAll()
-//                .antMatchers("/", "/index.html", "/api/user/login").permitAll()
-//
-//
-//                .antMatchers("/", "/index.html", "/api/user").permitAll()
-//                .antMatchers("/", "/index.html", "/api/quizz").permitAll()
-//                .antMatchers("/", "/index.html", "/api/question").permitAll()
-//                .antMatchers("/", "/index.html", "/api/answer").permitAll()
-
 
                 .anyRequest().authenticated()
 
@@ -58,8 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(getPasswordEncoder()).dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery("select username, role from users where username=?");
+                .usersByUsernameQuery("select username, password, enabled from user where username=?")
+                .authoritiesByUsernameQuery("select username, role from user where username=?");
     }
 
     @Bean
