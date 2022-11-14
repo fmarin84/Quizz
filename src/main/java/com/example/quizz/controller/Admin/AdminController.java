@@ -1,5 +1,6 @@
 package com.example.quizz.controller.Admin;
 
+import com.example.quizz.UserDTO;
 import com.example.quizz.entity.Answer;
 import com.example.quizz.entity.Question;
 import com.example.quizz.entity.Quizz;
@@ -14,9 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 @Controller
 public class AdminController {
@@ -117,14 +115,6 @@ public class AdminController {
     /* User */
     @GetMapping("user")
     public String getUserView(Model model){
-        model.addAttribute("users", userService.getAll());
-
-        return "user.html";
-    }
-
-    @PostMapping("newUser")
-    public String add(User user, Model model) throws Exception {
-        userService.add(user);
         model.addAttribute("users", userService.getAll());
 
         return "user.html";

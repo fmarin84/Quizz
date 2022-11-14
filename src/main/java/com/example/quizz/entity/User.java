@@ -8,21 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    public Integer id;
 
-    @Column(unique = true)
-    private String email;
-
-    private String firstName;
-    private String lastName;
+    private String username;
     private String password;
+
     @JsonInclude()
     @Transient
     private String confirmpassword;
+
+    private String role;
+    private int enabled; // 1 : active
+
+    private String firstName;
+    private String lastName;
+    private String email;
 
     @ManyToMany
     @JoinTable(name="user_answer",
@@ -32,51 +37,53 @@ public class User {
     @JsonIgnore
     private List<Answer> answerList = new ArrayList<>();
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getConfirmpassword() {
-        return confirmpassword;
+    public int getEnabled() {
+        return enabled;
     }
-
-    public void setConfirmpassword(String confirmpassword) {
-        this.confirmpassword = confirmpassword;
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
-
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -89,5 +96,27 @@ public class User {
         this.answerList = answerList;
     }
 
+    public String getConfirmpassword() {
+        return confirmpassword;
+    }
 
+    public void setConfirmpassword(String confirmpassword) {
+        this.confirmpassword = confirmpassword;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmpassword='" + confirmpassword + '\'' +
+                ", role='" + role + '\'' +
+                ", enabled=" + enabled +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", answerList=" + answerList +
+                '}';
+    }
 }

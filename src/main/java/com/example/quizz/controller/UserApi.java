@@ -1,9 +1,7 @@
 package com.example.quizz.controller;
 
-import com.example.quizz.entity.Answer;
-import com.example.quizz.entity.Quizz;
+import com.example.quizz.UserDTO;
 import com.example.quizz.entity.User;
-import com.example.quizz.service.AnswerService;
 import com.example.quizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +16,13 @@ public class UserApi {
     UserService userService;
 
     @PostMapping("user")
-    public User addUser(@RequestBody User user) throws Exception {
-        userService.add(user);
+    public UserDTO addUser(@RequestBody UserDTO user) throws Exception {
+        userService.registerNewUserAccount(user);
         return user;
+    }
+
+    @GetMapping("users")
+    public List<User> getAllUsers() {
+        return userService.getAll();
     }
 }
