@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class UserApi {
     @Autowired
     UserService userService;
