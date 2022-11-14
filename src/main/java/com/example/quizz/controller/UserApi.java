@@ -17,8 +17,8 @@ public class UserApi {
     UserService userService;
 
     @PostMapping("user")
-    public User addUser(@RequestBody User user){
-        userService.postUser(user);
+    public User addUser(@RequestBody User user) throws Exception {
+        userService.add(user);
         return user;
     }
 }

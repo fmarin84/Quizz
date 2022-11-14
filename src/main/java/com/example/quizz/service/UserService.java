@@ -5,6 +5,10 @@ import com.example.quizz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +23,30 @@ public class UserService {
 
     public User postUser(User user) { return userRepository.save(user); }
 
-    public void add(User user){
-        userRepository.save(user);
+    public void add(User user) throws NoSuchAlgorithmException {
+
+        System.out.println(user.getPassword());
+        System.out.println(user.getConfirmpassword());
+        System.out.println(user.getPassword().equals(user.getConfirmpassword()));
+
+        if( user.getPassword().equals(user.getConfirmpassword())){
+            user.setPassword(String.valueOf(getSHA(user.getPassword())));
+            System.out.println(user.getPassword());
+
+            userRepository.save(user);
+        }
+
+    }
+
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
+    {
+        // Static getInstance method is called with hashing SHA
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // digest() method called
+        // to calculate message digest of an input
+        // and return array of byte
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
     }
 
     public List<User> getAll(){ return userRepository.findAll();}

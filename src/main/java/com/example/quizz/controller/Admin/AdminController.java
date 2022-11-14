@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Controller
@@ -122,7 +123,7 @@ public class AdminController {
     }
 
     @PostMapping("newUser")
-    public String add(User user, Model model){
+    public String add(User user, Model model) throws Exception {
         userService.add(user);
         model.addAttribute("users", userService.getAll());
 

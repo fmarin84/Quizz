@@ -1,5 +1,7 @@
 package com.example.quizz.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +13,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(unique = true)
+    private String email;
+
     private String firstName;
     private String lastName;
     private String password;
-
-
-
+    @JsonInclude()
+    @Transient
+    private String confirmpassword;
 
     @ManyToMany
     @JoinTable(name="user_answer",
@@ -56,6 +61,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmpassword() {
+        return confirmpassword;
+    }
+
+    public void setConfirmpassword(String confirmpassword) {
+        this.confirmpassword = confirmpassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Answer> getAnswerList() {

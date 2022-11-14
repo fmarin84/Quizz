@@ -58,8 +58,11 @@
 </table>
 
 <form action="/newUser" method="POST">
+    <label>identifiant:</label><input type="email" name="email"/><br/>
     <label>Nom:</label><input type="text" name="firstName"/><br/>
     <label>Prénom:</label><input type="text" name="lastName"/><br/>
+    <label>Mot de passe:</label><input type="password" name="password"/><br/>
+    <label>Confirm de passe:</label><input type="password" name="confirmpassword"/><br/>
     <input type="submit" value="Ajouter">
 </form>
 </body>
