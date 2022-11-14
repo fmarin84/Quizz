@@ -3,58 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<h1>Question</h1>
 
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/quizz" class="nav-link" >Quizz</a></li>
+            <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
+            <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
+            <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+        </ul>
+    </header>
+</div>
 
-<form action="/quizz"  method="GET">
-    <input type="submit" value="Quizz">
-</form>
+<div class="container">
 
-<form action="/answer"  method="GET">
-    <input type="submit" value="Answer">
-</form>
+    <div class="row">
 
+        <h1>Question</h1>
 
-<p th:text="${ questions.size() }"></p>
+        <p th:text="${ questions.size() }"></p>
 
-<p th:if="${ questions.size() == 0 }">Aucune question</p>
+        <p th:if="${ questions.size() == 0 }">Aucune question</p>
 
-<table th:if="${ questions.size() > 0 }">
-    <thead>
+    </div>
+
+    <form action="/newquestion" method="POST">
+        <div class="input-group">
+            <span class="input-group-text">Titre</span>
+            <input type="text" name="title" aria-label="Titre"  class="form-control"/>
+        </div>
+        <br/>
+
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="quizz">Quizz</label>
+            <select class="form-select"  name="quizz" id="quizz">
+                <option th:each="q : ${ quizz }" th:value="${q.id}" th:text="${q.title}">
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Ajouter</button>
+
+        <br/>
+    </form>
+
+    <br/><br/>
+    <table th:if="${ questions.size() > 0 }">
+        <thead>
         <th>Title</th>
         <th>Quizz</th>
         <th>Action</th>
-    </thead>
-    <tr th:each="q : ${ questions }">
-        <td th:text="${ q.title }"></td>
+        </thead>
+        <tr th:each="q : ${ questions }">
+            <td th:text="${ q.title }"></td>
 
-        <td th:text="${ q.quizz.title }"></td>
+            <td th:text="${ q.quizz.title }"></td>
 
-        <td>
-            <form th:action="'/updateQuestion/' + ${q.id}"  method="GET">
-                <input type="submit" value="modifier">
-            </form>
-        </td>
+            <td>
+                <form th:action="'/updateQuestion/' + ${q.id}"  method="GET">
+                    <input type="submit" value="modifier">
+                </form>
+            </td>
 
-        <td>
-            <form th:action="'/deleteQuestion/' + ${q.id}"  method="POST">
-                <input type="submit" value="supprimer">
-            </form>
-        </td>
-    </tr>
-</table>
+            <td>
+                <form th:action="'/deleteQuestion/' + ${q.id}"  method="POST">
+                    <input type="submit" value="supprimer">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 
-<form action="/newquestion" method="POST">
-    <label>Titre:</label><input type="text" name="title"/><br/>
-    <label>Quizz:</label>
-    <select name="quizz" id="quizz">
-        <option th:each="q : ${ quizz }" th:value="${q.id}" th:text="${q.title}">
-        </option>
-    </select>
-    <br/>
-    <input type="submit" value="Ajouter">
-</form>
 </body>
 </html>

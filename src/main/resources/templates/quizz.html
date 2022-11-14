@@ -3,47 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
 </head>
+
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/quizz" class="nav-link" >Quizz</a></li>
+            <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
+            <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
+            <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+        </ul>
+    </header>
+</div>
+
 <body>
-<h1>Quizz</h1>
 
-<p th:text="${ quizz.size() }"></p>
+<div class="container">
+    <div class="row">
+        <h1>Quizz</h1>
 
-<p th:if="${ quizz.size() == 0 }">Aucun quizz</p>
+        <p th:text="${ quizz.size() }"></p>
 
-<form action="/question"  method="GET">
-    <input type="submit" value="Question">
-</form>
+        <p th:if="${ quizz.size() == 0 }">Aucun quizz</p>
+    </div>
 
-<form action="/answer"  method="GET">
-    <input type="submit" value="Answer">
-</form>
+    <div class="row">
+        <form action="/newquizz" method="POST">
+            <label>Titre: </label><input type="text" name="title"/><br/>
+            <input type="submit" value="Ajouter">
+        </form>
 
-<form action="/user"  method="GET">
-    <input type="submit" value="User">
-</form>
+    </div>
 
-<table th:if="${ quizz.size() > 0 }">
-    <tr th:each="q : ${ quizz }">
-        <td th:text="${ q.title }"></td>
+    <br/><br/>
 
-        <td>
-            <form th:action="'/updatequizz/' + ${q.id}"  method="GET">
-                <input type="submit" value="modifier">
-            </form>
-        </td>
+    <table th:if="${ quizz.size() > 0 }">
+        <tr th:each="q : ${ quizz }">
+            <td th:text="${ q.title }"></td>
 
-        <td>
-            <form th:action="'/deleteQuizz/' + ${q.id}"  method="POST">
-                <input type="submit" value="supprimer">
-            </form>
-        </td>
-    </tr>
-</table>
+            <td>
+                <form th:action="'/updatequizz/' + ${q.id}"  method="GET">
+                    <input type="submit" value="modifier">
+                </form>
+            </td>
 
-<form action="/newquizz" method="POST">
-    <label>Titre:</label><input type="text" name="title"/><br/>
-    <input type="submit" value="Ajouter">
-</form>
+            <td>
+                <form th:action="'/deleteQuizz/' + ${q.id}"  method="POST">
+                    <input type="submit" value="supprimer">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
 </body>
 </html>
