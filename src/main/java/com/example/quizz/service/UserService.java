@@ -21,6 +21,17 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public User login(String email, String password) throws Exception {
+
+        String pass = new BCryptPasswordEncoder().encode(password);
+        User user = userRepository.findByEmail(email).get();
+        if (user.getPassword() != pass){
+            throw new Exception();
+        }
+
+        return user;
+    }
+
     public User registerNewUserAccount(UserDTO userDTO) throws Exception{
 
         if(!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
