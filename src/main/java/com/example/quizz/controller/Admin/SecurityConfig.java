@@ -28,17 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index.html").permitAll()
                 //.antMatchers("/", "/api/**").permitAll()
                 .antMatchers("/", "/user/registration").permitAll()
-
-//                .antMatchers("/", "/index.html", "/api/questions/1").permitAll()
                 .antMatchers("/", "/index.html", "/api/user").permitAll()
                 .antMatchers("/", "/index.html", "/api/user/login").permitAll()
-//
-//
-//                .antMatchers("/", "/index.html", "/api/user").permitAll()
-//                .antMatchers("/", "/index.html", "/api/quizz").permitAll()
-//                .antMatchers("/", "/index.html", "/api/question").permitAll()
-//                .antMatchers("/", "/index.html", "/api/answer").permitAll()
-
 
                 .anyRequest().authenticated()
 
@@ -60,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(getPasswordEncoder()).dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery("select username, role from users where username=?");
+                .usersByUsernameQuery("select email, password, enabled from users where email=?")
+                .authoritiesByUsernameQuery("select email, role from users where email=?");
     }
 
     @Bean
