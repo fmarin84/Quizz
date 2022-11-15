@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // ne pas oublier le / devant les URLs
                 .antMatchers("/", "/index.html").permitAll()
                 //.antMatchers("/", "/api/**").permitAll()
+                .antMatchers("/", "/user/registration").permitAll()
 
 //                .antMatchers("/", "/index.html", "/api/questions/1").permitAll()
                 .antMatchers("/", "/index.html", "/api/user").permitAll()
