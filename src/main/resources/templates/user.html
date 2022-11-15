@@ -30,7 +30,14 @@
 
     <div class="row">
         <table th:if="${ users.size() > 0 }">
+            <thead>
+            <th>Email</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Action</th>
+            </thead>
             <tr th:each="u : ${ users }">
+                <td th:text="${ u.email }"></td>
                 <td th:text="${ u.firstName }"></td>
                 <td th:text="${ u.lastName }"></td>
 

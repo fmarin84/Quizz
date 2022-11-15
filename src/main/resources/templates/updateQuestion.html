@@ -16,25 +16,34 @@
             <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
             <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
             <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Déconnexion</a></li>
         </ul>
     </header>
 </div>
 
-<h1>Mise à jour d'une question</h1>
+<div class="container">
+    <h1>Mise à jour d'une question</h1>
 
-<form action="/updateQuestion" method="POST">
-    <input type="text" name="id" style="display: none;" th:value="${ question.id }"/>
-    <label>Titre:</label><input type="text" name="title" th:value="${ question.title }"/><br/>
+    <form action="/updateQuestion" method="POST">
+        <input type="text" name="id" style="display: none;" th:value="${ question.id }"/>
+        <div class="input-group">
+            <span class="input-group-text">Titre</span>
+            <input type="text" name="title" aria-label="title" class="form-control" th:value="${ question.title }"/>
+        </div>
+        <br/>
 
-    <label>Quizz:</label>
-    <select name="quizz" id="quizz">
-        <option th:each="q : ${ quizz }" th:value="${q.id}" th:text="${q.title}">
-        </option>
-    </select>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="quizz">Quizz</label>
+            <select class="form-select"  name="quizz" id="quizz">
+                <option th:each="q : ${ quizz }" th:value="${q.id}" th:text="${q.title}">
+                </option>
+            </select>
+        </div>
 
-    <br/>
+        <br/>
 
-    <input type="submit" value="Modifier">
-</form>
+        <button class="btn btn-primary" type="submit">Modifier</button>
+    </form>
+</div>
 </body>
 </html>

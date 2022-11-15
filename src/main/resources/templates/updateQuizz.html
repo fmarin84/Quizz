@@ -16,16 +16,25 @@
             <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
             <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
             <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Déconnexion</a></li>
         </ul>
     </header>
 </div>
 
-<h1>Mise à jour d'un Quizz</h1>
+<div class="container">
 
-<form action="/updatequizz" method="POST">
-    <input type="text" name="id" style="display: none;" th:value="${ quizz.id }"/>
-    <label>Titre:</label><input type="text" name="title" th:value="${ quizz.title }"/><br/>
-    <input type="submit" value="Modifier">
-</form>
+    <h1>Mise à jour d'un Quizz</h1>
+
+    <form action="/updatequizz" method="POST">
+        <input type="text" name="id" style="display: none;" th:value="${ quizz.id }"/>
+
+        <div class="input-group">
+            <span class="input-group-text">Titre</span>
+            <input type="text" name="title" aria-label="Quizz" class="form-control" th:value="${ quizz.title }"/>
+        </div>
+        <br/>
+        <button class="btn btn-primary" type="submit">Modifier</button>
+    </form>
+</div>
 </body>
 </html>

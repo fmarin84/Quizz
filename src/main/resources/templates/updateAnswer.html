@@ -16,29 +16,52 @@
             <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
             <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
             <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Déconnexion</a></li>
         </ul>
     </header>
 </div>
 
-<h1>Mise à jour d'une reponse</h1>
+<div class="container">
+    <h1>Mise à jour d'une reponse</h1>
 
-<form action="/updateAnswer" method="POST">
-    <input type="text" name="id" style="display: none;" th:value="${ answer.id }"/>
-    <label>Titre:</label><input type="text" name="title" th:value="${ answer.title }"/><br/>
+    <form action="/updateAnswer" method="POST">
+        <input type="text" name="id" style="display: none;" th:value="${ answer.id }"/>
+        <div class="input-group">
+            <span class="input-group-text">Réponse</span>
+            <input type="text" name="title" aria-label="title" class="form-control" th:value="${ answer.title }"/>
+        </div>
+        <br/>
 
-    <label>Quizz:</label>
-    <select name="question" id="question">
-        <option th:each="q : ${ questions }" th:value="${q.id}" th:text="${q.title}">
-        </option>
-    </select>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="question">Question</label>
+            <select class="form-select"  name="question" id="question">
+                <option th:each="q : ${ questions }" th:value="${q.id}" th:text="${q.title}">
+                </option>
+            </select>
+        </div>
+        <br/>
 
-    <br/>
-    <label>Vrai ?</label>
+        <span th:if="${ answer.isRightWrong() == true }">
+            <div class="form-check" >
+                <input class="form-check-input" type="checkbox" value="" id="rightWrong" name="rightWrong" checked>
+                <label class="form-check-label" for="rightWrong">
+                    Réponse juste
+                </label>
+            </div>
+        </span>
 
-    <p th:if="${ answer.isRightWrong() == true }"><input type="checkbox" name="rightWrong" checked></p>
-    <p th:if="${ answer.isRightWrong() == false }"><input type="checkbox" name="rightWrong" ></p>
+        <span th:if="${ answer.isRightWrong() == false }">
+            <div class="form-check" >
+                <input class="form-check-input" type="checkbox" value="" id="rightWrong" name="rightWrong">
+                <label class="form-check-label" for="rightWrong">
+                    Réponse juste
+                </label>
+            </div>
+        </span>
+        <br/>
 
-    <input type="submit" value="Modifier">
-</form>
+        <input type="submit" value="Modifier">
+    </form>
+</div>
 </body>
 </html>
