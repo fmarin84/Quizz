@@ -16,6 +16,7 @@
             <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
             <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
             <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Déconnexion</a></li>
         </ul>
     </header>
 </div>
@@ -25,9 +26,6 @@
     <div class="row">
 
         <h1>Question</h1>
-
-        <p th:text="${ questions.size() }"></p>
-
         <p th:if="${ questions.size() == 0 }">Aucune question</p>
 
     </div>
@@ -46,37 +44,33 @@
                 </option>
             </select>
         </div>
-
-        <button class="btn btn-primary" type="submit">Ajouter</button>
-
         <br/>
+        <button class="btn btn-primary" type="submit">Ajouter</button>
     </form>
 
     <br/><br/>
-    <table th:if="${ questions.size() > 0 }">
-        <thead>
-        <th>Title</th>
-        <th>Quizz</th>
-        <th>Action</th>
-        </thead>
-        <tr th:each="q : ${ questions }">
-            <td th:text="${ q.title }"></td>
+    <div class="row">
+        <table th:if="${ questions.size() > 0 }">
+            <thead>
+            <th>Title</th>
+            <th>Quizz</th>
+            <th>Action</th>
+            </thead>
+            <tr th:each="q : ${ questions }">
+                <td th:text="${ q.title }"></td>
 
-            <td th:text="${ q.quizz.title }"></td>
+                <td th:text="${ q.quizz.title }"></td>
 
-            <td>
-                <form th:action="'/updateQuestion/' + ${q.id}"  method="GET">
-                    <input type="submit" value="modifier">
-                </form>
-            </td>
+                <td>
+                    <a th:href="'/updateQuestion/' + ${q.id}" class="btn btn-warning">Modifier</a>
+                </td>
 
-            <td>
-                <form th:action="'/deleteQuestion/' + ${q.id}"  method="POST">
-                    <input type="submit" value="supprimer">
-                </form>
-            </td>
-        </tr>
-    </table>
+                <td>
+                    <a th:href="'/deleteQuestion/' + ${q.id}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 </body>

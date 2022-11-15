@@ -16,68 +16,79 @@
             <li class="nav-item"><a href="/question" class="nav-link">Questions</a></li>
             <li class="nav-item"><a href="/answer" class="nav-link">Réponses</a></li>
             <li class="nav-item"><a href="/user" class="nav-link">Utilisateurs</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Déconnexion</a></li>
         </ul>
     </header>
 </div>
 
-<h1>Answer</h1>
+<div class="container">
 
-<form action="/quizz"  method="GET">
-    <input type="submit" value="Quizz">
-</form>
+    <div class="row">
 
-<form action="/question"  method="GET">
-    <input type="submit" value="Question">
-</form>
+        <h1>Answer</h1>
+        <p th:if="${ answers.size() == 0 }">Aucune question</p>
 
-<p th:text="${ answers.size() }"></p>
+    </div>
 
-<p th:if="${ answers.size() == 0 }">Aucune question</p>
+    <div class="row">
 
-<table th:if="${ answers.size() > 0 }">
-    <thead>
-    <th>Title</th>
-    <th>Question</th>
-    <th>Quizz</th>
-    <th>Valide</th>
-    <th>Action</th>
-    </thead>
-    <tr th:each="a : ${ answers }">
-        <td th:text="${ a.title }"></td>
+        <form action="/newAnswer" method="POST">
+            <div class="input-group">
+                <span class="input-group-text">Titre</span>
+                <input type="text" name="title" aria-label="Réponse"  class="form-control"/>
+            </div>
+            <br/>
 
-        <td th:text="${ a.question.title }"></td>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="Question">Question</label>
+                <select class="form-select"  name="Question" id="Question">
+                    <option th:each="q : ${ questions }" th:value="${q.id}" th:text="${q.title}">
+                    </option>
+                </select>
+            </div>
+            <br/>
 
-        <td th:text="${ a.question.quizz.title }"></td>
+            <div class="input-group">
+                <label>Vrai ?</label>
+                <input type="checkbox" name="rightWrong" id="rightWrong">
+            </div>
+            <br/>
 
-        <td th:text="${ a.rightWrong }"></td>
+            <button class="btn btn-primary" type="submit">Ajouter</button>
+        </form>
+    </div>
 
-        <td>
-            <form th:action="'/updateAnswer/' + ${a.id}"  method="GET">
-                <input type="submit" value="modifier">
-            </form>
-        </td>
+    <br/><br/>
+    <div class="row">
 
-        <td>
-            <form th:action="'/deleteAnswer/' + ${a.id}"  method="POST">
-                <input type="submit" value="supprimer">
-            </form>
-        </td>
-    </tr>
-</table>
+        <table th:if="${ answers.size() > 0 }">
+            <thead>
+            <th>Réponse</th>
+            <th>Question</th>
+            <th>Quizz</th>
+            <th>Valide</th>
+            <th>Action</th>
+            </thead>
+            <tr th:each="a : ${ answers }">
+                <td th:text="${ a.title }"></td>
 
-<form action="/newAnswer" method="POST">
-    <label>Titre:</label><input type="text" name="title"/><br/>
-    <label>Question:</label>
-    <select name="question" id="question">
-        <option th:each="q : ${ questions }" th:value="${q.id}" th:text="${q.title}">
-        </option>
-    </select>
-    <br/>
-    <label>Vrai ?</label>
-    <input type="checkbox" name="rightWrong" id="rightWrong">
-<!--    value="checked"-->
+                <td th:text="${ a.question.title }"></td>
 
-    <input type="submit" value="Ajouter">
-</form>
+                <td th:text="${ a.question.quizz.title }"></td>
+
+                <td th:text="${ a.rightWrong }"></td>
+
+                <td>
+                    <a th:href="'/updateAnswer/' + ${a.id}" class="btn btn-warning">Modifier</a>
+                </td>
+
+                <td>
+                    <a th:href="'/deleteAnswer/' + ${a.id}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>
