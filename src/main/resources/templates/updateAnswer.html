@@ -43,8 +43,8 @@
 
         <span th:if="${ answer.isRightWrong() == true }">
             <div class="form-check" >
-                <input class="form-check-input" type="checkbox" value="" id="rightWrong" name="rightWrong" checked>
-                <label class="form-check-label" for="rightWrong">
+                <input class="form-check-input" type="checkbox" id="right" name="rightWrong" checked>
+                <label class="form-check-label" for="right">
                     Réponse juste
                 </label>
             </div>
@@ -52,8 +52,8 @@
 
         <span th:if="${ answer.isRightWrong() == false }">
             <div class="form-check" >
-                <input class="form-check-input" type="checkbox" value="" id="rightWrong" name="rightWrong">
-                <label class="form-check-label" for="rightWrong">
+                <input class="form-check-input" type="checkbox" id="Wrong" name="rightWrong">
+                <label class="form-check-label" for="Wrong">
                     Réponse juste
                 </label>
             </div>

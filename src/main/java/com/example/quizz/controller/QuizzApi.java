@@ -1,13 +1,16 @@
 package com.example.quizz.controller;
 
+import com.example.quizz.entity.Answer;
+import com.example.quizz.entity.Question;
 import com.example.quizz.entity.Quizz;
+import com.example.quizz.entity.User;
 import com.example.quizz.service.QuizzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api")
@@ -33,8 +36,73 @@ public class QuizzApi {
         }
     }
 
-    @GetMapping("findbytitle")
-    public List<Quizz> findByTitle(@RequestParam(value = "title", required = false) String title){
-        return quizzService.findByTitle(title);
+    @GetMapping("quizz/score/{id}")
+    public HashMap getScore(@PathVariable("id") int id){
+        Optional<Quizz> op = quizzService.getQuizz(id);
+
+        int score = 0;
+        HashMap<String, Integer> classement = new HashMap<>();
+
+//        HashMap<String, Integer> classementSorted = new HashMap<>();
+
+        if(op.isEmpty()){
+            return  new HashMap<String,Integer>();
+        } else {
+            Quizz quizz = op.get();
+            List<Question> questions = quizz.getQuestions();
+
+            for (Question question : questions) {
+                List<Answer> answers = question.getAnswers();
+
+                for (Answer answer : answers) {
+                    List<User> users = answer.getUserList();
+
+                    if(answer.isRightWrong()){
+                        //vrai
+
+                        for (User user : users) {
+                            if(classement.get(user.getUsername()) != null){
+                                score = classement.get(user.getUsername()) + 1;
+                            }else {
+                                score++;
+                            }
+
+                            classement.put(user.getUsername(), score);
+                            score = 0;
+                        }
+                    } else {
+                        for (User user : users) {
+                            if(classement.get(user.getUsername()) != null){
+                                if(classement.get(user.getUsername()) >= 1){
+                                    score = classement.get(user.getUsername()) - 1;
+                                }
+                            }
+
+                            classement.put(user.getUsername(), score);
+                            score = 0;
+                        }
+                    }
+                }
+            }
+
+//            Object[] a = classement.entrySet().toArray();
+//            Arrays.sort(a, new Comparator() {
+//                public int compare(Object o1, Object o2) {
+//                    return ((Map.Entry<String, Integer>) o2).getValue()
+//                            .compareTo(((Map.Entry<String, Integer>) o1).getValue());
+//                }
+//            });
+//            for (Object e : a) {
+//                System.out.println(
+//                        ((Map.Entry<String, Integer>) e).getKey() + " : "
+//                        + ((Map.Entry<String, Integer>) e).getValue()
+//
+//                );
+//
+//                classementSorted.put(((Map.Entry<String, Integer>) e).getKey(), ((Map.Entry<String, Integer>) e).getValue());
+//            }
+
+            return classement;
+        }
     }
 }
