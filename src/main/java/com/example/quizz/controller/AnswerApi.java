@@ -29,8 +29,8 @@ public class AnswerApi {
     }
 
     @PostMapping("answer")
-    public Answer addAnswer(@RequestBody Answer answer){
-        answerService.postAnswer(answer);
+    public Answer addUserAnswer(@RequestBody Answer answer){
+        answerService.postUserAnswer(answer);
         return answer;
     }
 
