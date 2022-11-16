@@ -34,23 +34,18 @@ public class UserService {
         }
     }
 
-    public User registerNewUserAccount(UserDTO userDTO) throws Exception{
+    public User registerNewUserAccount(UserDTO userDTO){
+         User u = new User();
+         u.setEnabled(true);
+         u.setUsername(userDTO.getUserName());
+         u.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+         u.setRole("ROLE_USER");
 
-         if(!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
-             throw new Exception();
-         }
+         u.setFirstName(userDTO.getFirstName());
+         u.setLastName(userDTO.getLastName());
+         u.setEmail(userDTO.getEmail());
 
-        User u = new User();
-        u.setEnabled(true);
-        u.setUsername(userDTO.getUserName());
-        u.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-        u.setRole("ROLE_USER");
-
-        u.setFirstName(userDTO.getFirstName());
-        u.setLastName(userDTO.getLastName());
-        u.setEmail(userDTO.getEmail());
-
-        return userRepository.save(u);
+         return userRepository.save(u);
     }
 
     public Optional<User> getById(int id){
@@ -82,5 +77,7 @@ public class UserService {
             throw new Exception();
         }
     }
+
+    public Optional<User> findByEmail(String email){  return userRepository.findByEmail(email);  }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +33,22 @@ public class RegistrationController {
     @PostMapping("/user/registration")
     public String registerUserAccount(
             @ModelAttribute("user") @Valid UserDTO userDTO,
-            BindingResult result) throws Exception {
+            BindingResult result) {
+
+        if (!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
+            result.rejectValue("password", "error.user", "Les mots de passe doivent être identiques.");
+            result.rejectValue("confirmParssword", "error.user", "Les mots de passe doivent être identiques.");
+        }
+
+        if(userService.findByEmail(userDTO.getEmail()).isPresent()){
+            result.rejectValue("email", "error.user", "Ce compte existe déjà.");
+        }
 
         if (result.hasErrors()) {
             return "registration";
         }
         else {
-            User registered = userService.registerNewUserAccount(userDTO);
+            userService.registerNewUserAccount(userDTO);
             return "registration-success";
         }
     }
