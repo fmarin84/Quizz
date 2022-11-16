@@ -43,8 +43,6 @@ public class QuizzApi {
         int score = 0;
         HashMap<String, Integer> classement = new HashMap<>();
 
-//        HashMap<String, Integer> classementSorted = new HashMap<>();
-
         if(op.isEmpty()){
             return  new HashMap<String,Integer>();
         } else {
@@ -84,23 +82,6 @@ public class QuizzApi {
                     }
                 }
             }
-
-//            Object[] a = classement.entrySet().toArray();
-//            Arrays.sort(a, new Comparator() {
-//                public int compare(Object o1, Object o2) {
-//                    return ((Map.Entry<String, Integer>) o2).getValue()
-//                            .compareTo(((Map.Entry<String, Integer>) o1).getValue());
-//                }
-//            });
-//            for (Object e : a) {
-//                System.out.println(
-//                        ((Map.Entry<String, Integer>) e).getKey() + " : "
-//                        + ((Map.Entry<String, Integer>) e).getValue()
-//
-//                );
-//
-//                classementSorted.put(((Map.Entry<String, Integer>) e).getKey(), ((Map.Entry<String, Integer>) e).getValue());
-//            }
 
             return classement;
         }

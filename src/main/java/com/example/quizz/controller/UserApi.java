@@ -1,6 +1,9 @@
 package com.example.quizz.controller;
 
 import com.example.quizz.UserDTO;
+import com.example.quizz.entity.Answer;
+import com.example.quizz.entity.Question;
+import com.example.quizz.entity.Quizz;
 import com.example.quizz.entity.User;
 import com.example.quizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api")
@@ -35,4 +40,29 @@ public class UserApi {
     public List<User> getAllUsers() {
         return userService.getAll();
     }
+
+    @GetMapping("user/quizz/{id}")
+    public HashMap getQuizzByUser(@PathVariable("id") int id){
+        Optional<User> userOptional = userService.getUser(id);
+
+        int score = 0;
+        HashMap<String, Boolean> classement = new HashMap<>();
+
+        if(userOptional.isEmpty()){
+            return  new HashMap<String,Integer>();
+        } else {
+            User user = userOptional.get();
+            List<Answer> answers = user.getAnswerList();
+
+            for (Answer answer : answers) {
+                Question question = answer.getQuestion();
+                Quizz quizz = question.getQuizz();
+
+                classement.put(quizz.getTitle(), true);
+            }
+
+            return classement;
+        }
+    }
+
 }
