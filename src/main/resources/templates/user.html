@@ -68,7 +68,7 @@
                 </td>
 
                 <td>
-                    <form th:action="'/deleteUser/' + ${u.id}" method="POST">
+                    <form th:action="'/deleteUser/' + ${u.id}" method="POST"  onsubmit="return confirm('Êtes-vous sûr de vouloir vous supprimer cet utilisateur ?');">
                         <button type="submit" class="btn btn-danger" >Supprimer</button>
                     </form>
                 </td>

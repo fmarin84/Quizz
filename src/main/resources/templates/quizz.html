@@ -77,7 +77,7 @@
                 </td>
 
                 <td>
-                    <form th:action="'/deleteQuizz/' + ${q.id}" method="POST">
+                    <form th:action="'/deleteQuizz/' + ${q.id}" method="POST"  onsubmit="return confirm('Êtes-vous sûr de vouloir vous supprimer ce quizz ?');">
                         <button type="submit" class="btn btn-danger" >Supprimer</button>
                     </form>
                 </td>
