@@ -44,40 +44,10 @@
 
 <div class="container">
     <div class="row">
-
-        <h1>Answer</h1>
+        <h1>Réponse</h1>
         <p th:if="${ answers.size() == 0 }">Aucune question</p>
-
     </div>
 
-    <div class="row" th:each="quizz : ${ quizz }">
-
-        <h2 th:text="${ quizz.title }"></h2>
-        <br>
-        <div th:each="question : ${ questions }">
-
-            <h5 th:text="${ question.title }"></h5>
-
-            <table th:if="${ question.answers.size() > 0 }">
-                <thead>
-                <th>Réponse</th>
-                <th>Valide</th>
-                <th>Action</th>
-                </thead>
-                <tr th:each="a : ${ question.answers }">
-                    <td class="col-md-4" th:text="${ a.title }"></td>
-                    <td class="col-md-4" th:text="${ a.rightWrong }"></td>
-
-                    <td class="col-md-4">
-                        <a th:href="'/updateAnswer/' + ${a.id}" class="btn btn-warning">Modifier</a>
-                    </td>
-                </tr>
-            </table>
-            <br><br>
-        </div>
-    </div>
-
-    <br/><br/>
     <div class="row">
         <form action="/newAnswer" method="POST">
             <div class="input-group">
@@ -107,6 +77,33 @@
         </form>
     </div>
 
+    <br/><br/>
+    <div class="row" th:each="quizz : ${ quizz }">
+
+        <h2 th:text="${ quizz.title }"></h2>
+        <br>
+        <div th:each="question : ${ questions }">
+
+            <h5 th:text="${ question.title }"></h5>
+
+            <table th:if="${ question.answers.size() > 0 }">
+                <thead>
+                <th>Réponse</th>
+                <th>Valide</th>
+                <th>Action</th>
+                </thead>
+                <tr th:each="a : ${ question.answers }">
+                    <td class="col-md-4" th:text="${ a.title }"></td>
+                    <td class="col-md-4" th:text="${ a.rightWrong }"></td>
+
+                    <td class="col-md-4">
+                        <a th:href="'/updateAnswer/' + ${a.id}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+        </div>
+    </div>
 
 </div>
 

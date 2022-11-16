@@ -20,7 +20,7 @@ public class usersTest {
         void encodePassword() {
 
             User u = userRepository.findById(1).get();
-            String password = new BCryptPasswordEncoder().encode("beanpassword");
+            String password = new BCryptPasswordEncoder().encode("password");
             u.setPassword(password);
             userRepository.save(u);
         }

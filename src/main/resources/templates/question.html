@@ -46,7 +46,6 @@
     <div class="row">
         <h1>Question</h1>
         <p th:if="${ questions.size() == 0 }">Aucune question</p>
-
     </div>
 
     <form action="/question" th:object="${question}" method="POST"
