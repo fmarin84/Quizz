@@ -171,6 +171,7 @@ public class AdminController {
 
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("quizz", quizzService.getAll());
 
         return "answer.html";
     }
@@ -180,6 +181,7 @@ public class AdminController {
         answerService.add(answer);
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("quizz", quizzService.getAll());
 
         return "answer.html";
     }
@@ -196,6 +198,8 @@ public class AdminController {
     public String updateAnswer(Answer answer, Model model) throws Exception {
         answerService.update(answer.getId(), answer);
         model.addAttribute("answers", answerService.getAll());
+        model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("quizz", quizzService.getAll());
 
         return "answer.html";
     }
@@ -205,6 +209,7 @@ public class AdminController {
         answerService.deleteAnswer(id);
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("quizz", quizzService.getAll());
 
         return "answer.html";
     }
