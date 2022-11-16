@@ -23,9 +23,8 @@ public class UserApi {
     UserService userService;
 
     @PostMapping("user")
-    public UserDTO addUser(@RequestBody UserDTO user) throws Exception {
-        userService.registerNewUserAccount(user);
-        return user;
+    public User addUser(@RequestBody UserDTO user) throws Exception {
+        return userService.registerNewUserAccount(user);
     }
 
     @PostMapping("user/login")
