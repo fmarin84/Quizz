@@ -11,6 +11,7 @@ import com.example.quizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -146,6 +147,9 @@ System.out.println(userService.getUser(id).get());
     /* Answer */
     @GetMapping("answer")
     public String getAnswerView(Model model){
+
+        System.out.println("GET_azertyuio");
+
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());
 
@@ -179,6 +183,8 @@ System.out.println(userService.getUser(id).get());
 
     @PostMapping("deleteAnswer/{id}")
     public String deleteAnswer(@PathVariable("id") int id, Model model){
+        System.out.println("azertyuio");
+
         answerService.deleteAnswer(id);
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());

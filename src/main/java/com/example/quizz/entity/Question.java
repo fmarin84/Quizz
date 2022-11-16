@@ -15,11 +15,11 @@ public class Question {
 
     private String title;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JsonIgnore
     private Quizz quizz;
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name="question_id")
     private List<Answer> answers = new ArrayList<>();
 

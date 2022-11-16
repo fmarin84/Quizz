@@ -66,7 +66,9 @@
                 </td>
 
                 <td>
-                    <a th:href="'/deleteQuestion/' + ${q.id}" class="btn btn-danger">Supprimer</a>
+                    <form th:action="'/deleteQuestion/' + ${q.id}" method="POST">
+                        <button type="submit" class="btn btn-danger" >Supprimer</button>
+                    </form>
                 </td>
             </tr>
         </table>

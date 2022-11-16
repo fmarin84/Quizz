@@ -31,7 +31,6 @@ public class QuizzService {
             throw new Exception();
         Optional<Quizz> q = quizzRepository.findById(id);
         if(q.isPresent()) {
-            quizz.setTitle(q.get().getTitle());
             quizz.setQuestions(q.get().getQuestions());
             quizzRepository.save(quizz);
         } else {

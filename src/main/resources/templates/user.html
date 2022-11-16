@@ -48,7 +48,9 @@
                 </td>
 
                 <td>
-                    <a th:href="'/deleteUser/' + ${u.id}" class="btn btn-danger">Supprimer</a>
+                    <form th:action="'/deleteUser/' + ${u.id}" method="POST">
+                        <button type="submit" class="btn btn-danger" >Supprimer</button>
+                    </form>
                 </td>
 
             </tr>

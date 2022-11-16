@@ -26,7 +26,7 @@ public class Answer {
         this.question = question;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name="user_answer",
             joinColumns = @JoinColumn(name="answer_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
