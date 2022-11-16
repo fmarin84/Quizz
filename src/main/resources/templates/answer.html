@@ -65,31 +65,25 @@
 
         <table th:if="${ answers.size() > 0 }">
             <thead>
-            <th>Réponse</th>
-            <th>Question</th>
             <th>Quizz</th>
+            <th>Question</th>
+            <th>Réponse</th>
             <th>Valide</th>
             <th>Action</th>
             </thead>
             <tr th:each="a : ${ answers }">
-                <td th:text="${ a.title }"></td>
+
+                <td th:text="${ a.question.quizz.title }"></td>
 
                 <td th:text="${ a.question.title }"></td>
 
-                <td th:text="${ a.question.quizz.title }"></td>
+                <td th:text="${ a.title }"></td>
 
                 <td th:text="${ a.rightWrong }"></td>
 
                 <td>
                     <a th:href="'/updateAnswer/' + ${a.id}" class="btn btn-warning">Modifier</a>
                 </td>
-
-                <td>
-                    <form th:action="'/deleteAnswer/' + ${a.id}" method="POST">
-                        <button type="submit" class="btn btn-danger" >Supprimer</button>
-                    </form>
-                </td>
-
             </tr>
         </table>
     </div>

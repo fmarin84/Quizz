@@ -26,15 +26,13 @@ public class RegistrationController {
 
         UserDTO userDto = new UserDTO();
         model.addAttribute("user", userDto);
-        return "registration";// template/registration.html
+        return "registration";
     }
 
     @PostMapping("/user/registration")
     public String registerUserAccount(
             @ModelAttribute("user") @Valid UserDTO userDTO,
             BindingResult result) throws Exception {
-
-        System.out.println("registerUserAccount(): " + userDTO);
 
         if (result.hasErrors()) {
             return "registration";

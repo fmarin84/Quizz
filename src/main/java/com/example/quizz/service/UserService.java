@@ -36,9 +36,9 @@ public class UserService {
 
     public User registerNewUserAccount(UserDTO userDTO) throws Exception{
 
-         //if(!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
-         //    throw new Exception();
-         //}
+         if(!userDTO.getPassword().equals(userDTO.getConfirmParssword())){
+             throw new Exception();
+         }
 
         User u = new User();
         u.setEnabled(true);
