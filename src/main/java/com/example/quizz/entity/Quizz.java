@@ -16,7 +16,7 @@ public class Quizz {
     private String title;
 
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name="quizz_id")
     private List<Question> questions = new ArrayList<>();
 

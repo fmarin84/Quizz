@@ -1,11 +1,8 @@
 package com.example.quizz.controller;
 
 import com.example.quizz.entity.Answer;
-import com.example.quizz.entity.Question;
 import com.example.quizz.service.AnswerService;
-import com.example.quizz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +31,4 @@ public class AnswerApi {
         return answer;
     }
 
-    //@GetMapping("getAnswerList/{id}")
-    //public List<Answer> getAnswerList(@PathVariable("id") int idUser){
-    //    return answerService.getAnswerList(idUser);
-    //}
 }

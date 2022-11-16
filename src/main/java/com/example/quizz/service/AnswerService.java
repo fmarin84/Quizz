@@ -40,10 +40,6 @@ public class AnswerService {
         return answerRepository.save(a);
     }
 
-    //public List<Answer> getAnswerList(int id){
-    //    return answerRepository.findByUser_Id(id);
-    //}
-
     public void add(Answer answer){ answerRepository.save(answer); }
 
     public List<Answer> getAll(){ return answerRepository.findAll();}
@@ -60,9 +56,6 @@ public class AnswerService {
 
         Optional<Answer> q = answerRepository.findOneById(id);
         if(q.isPresent()) {
-            
-            q.get().setTitle(answer.getTitle());
-            q.get().setRightWrong(answer.isRightWrong());
             answerRepository.save(answer);
         } else {
             throw new Exception();

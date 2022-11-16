@@ -25,7 +25,6 @@ public class UserService {
 
         User user = userRepository.findByEmail(email).get();
 
-
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (encoder.matches(password, user.getPassword())){
@@ -33,8 +32,6 @@ public class UserService {
         }else{
             throw new Exception();
         }
-
-
     }
 
     public User registerNewUserAccount(UserDTO userDTO) throws Exception{
@@ -44,7 +41,7 @@ public class UserService {
          //}
 
         User u = new User();
-        u.setEnabled(1);
+        u.setEnabled(true);
         u.setUsername(userDTO.getUserName());
         u.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
         u.setRole("ROLE_USER");
@@ -70,18 +67,15 @@ public class UserService {
 
     public void update(int id, User user) throws Exception{
 
-        System.out.println("id");
-        System.out.println(id);
-        System.out.println(user);
-
         if(id != user.getId())
             throw new Exception();
 
         Optional<User> u = userRepository.findOneById(id);
         if(u.isPresent()) {
-            //TODO Faire une fonction
-            u.get().setFirstName(user.getFirstName());
-            u.get().setLastName(user.getLastName());
+            user.setEmail(u.get().getEmail());
+            user.setPassword(u.get().getPassword());
+            user.setRole(u.get().getRole());
+            user.setUsername(u.get().getUsername());
             userRepository.save(user);
         } else {
             throw new Exception();

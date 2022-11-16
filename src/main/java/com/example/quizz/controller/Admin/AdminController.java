@@ -1,6 +1,5 @@
 package com.example.quizz.controller.Admin;
 
-import com.example.quizz.UserDTO;
 import com.example.quizz.entity.Answer;
 import com.example.quizz.entity.Question;
 import com.example.quizz.entity.Quizz;
@@ -123,7 +122,7 @@ public class AdminController {
     @GetMapping("updateUser/{id}")
     public String getUpdateUserView(@PathVariable("id") int id, Model model){
         model.addAttribute("user", userService.getUser(id).get());
-
+System.out.println(userService.getUser(id).get());
         return "updateUser.html";
     }
 

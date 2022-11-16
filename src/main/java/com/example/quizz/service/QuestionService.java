@@ -33,10 +33,9 @@ public class QuestionService {
         if(id != question.getId())
             throw new Exception();
 
-        Optional<Question> q = questionRepository.findOneById(id);
+        Optional<Question> q = questionRepository.findById(id);
         if(q.isPresent()) {
-            //TODO Faire une fonction
-            q.get().setTitle(question.getTitle());
+            question.setAnswers(q.get().getAnswers());
             questionRepository.save(question);
         } else {
             throw new Exception();

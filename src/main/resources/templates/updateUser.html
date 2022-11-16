@@ -38,6 +38,25 @@
         </div>
         <br/>
 
+        <span th:if="${ user.enabled == true }">
+            <div class="form-check" >
+                <input class="form-check-input" type="checkbox" id="isEnabled" name="enabled" checked>
+                <label class="form-check-label" for="isEnabled">
+                    actif
+                </label>
+            </div>
+        </span>
+
+        <span th:if="${ user.enabled == false }">
+            <div class="form-check" >
+                <input class="form-check-input" type="checkbox" id="enabled" name="enabled">
+                <label class="form-check-label" for="enabled">
+                    actif
+                </label>
+            </div>
+        </span>
+        <br/>
+
         <button class="btn btn-primary" type="submit">Modifier</button>
     </form>
 </div>

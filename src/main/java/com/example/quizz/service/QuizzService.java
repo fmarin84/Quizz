@@ -29,11 +29,10 @@ public class QuizzService {
     public void update(int id, Quizz quizz) throws Exception{
         if(id != quizz.getId())
             throw new Exception();
-
-        Optional<Quizz> q = quizzRepository.findOneById(id);
+        Optional<Quizz> q = quizzRepository.findById(id);
         if(q.isPresent()) {
-            //TODO Faire une fonction
-            q.get().setTitle(quizz.getTitle());
+            quizz.setTitle(q.get().getTitle());
+            quizz.setQuestions(q.get().getQuestions());
             quizzRepository.save(quizz);
         } else {
             throw new Exception();

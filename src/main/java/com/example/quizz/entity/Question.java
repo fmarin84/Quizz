@@ -15,11 +15,9 @@ public class Question {
 
     private String title;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Quizz quizz;
-
-
 
     @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name="question_id")

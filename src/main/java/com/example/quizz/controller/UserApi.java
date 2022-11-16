@@ -65,7 +65,7 @@ public class UserApi {
         }
     }
 
-    @GetMapping("user/aswers/{id}/quizz/{quizzId}")
+    @GetMapping("user/answers/{id}/quizz/{quizzId}")
     public List<Answer> getAnswersByUser(@PathVariable("id") int id, @PathVariable("quizzId") int quizzId){
         Optional<User> userOptional = userService.getUser(id);
         List<Answer> answers = new ArrayList<>();
