@@ -26,7 +26,7 @@ public class Answer {
         this.question = question;
     }
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany
     @JoinTable(name="user_answer",
             joinColumns = @JoinColumn(name="answer_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
@@ -74,6 +74,10 @@ public class Answer {
 
     public Answer(String title) {
         this.title = title;
+    }
+    public Answer(String title, Boolean rightWrong) {
+        this.title = title;
+        this.rightWrong = rightWrong;
     }
 
     @Override

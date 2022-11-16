@@ -19,7 +19,7 @@ public class Question {
     @JsonIgnore
     private Quizz quizz;
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="question_id")
     private List<Answer> answers = new ArrayList<>();
 

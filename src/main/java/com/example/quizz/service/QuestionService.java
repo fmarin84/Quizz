@@ -1,9 +1,13 @@
 package com.example.quizz.service;
 
+import com.example.quizz.QuestionDTO;
+import com.example.quizz.entity.Answer;
 import com.example.quizz.entity.Question;
 import com.example.quizz.entity.Quizz;
+import com.example.quizz.entity.User;
 import com.example.quizz.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +18,35 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private AnswerService answerService;
     public List<Question> getAll(){ return questionRepository.findAll();}
 
     public void add(Question question){
+        questionRepository.save(question);
+    }
+
+    public void addDTO(QuestionDTO questionDTO){
+        System.out.println(questionDTO);
+
+        Question question = new Question();
+        question.setTitle(questionDTO.getTitle());
+        question.setQuizz(questionDTO.getQuizz());
+
+//        answerService.add(new Answer(questionDTO.getAnswer1(), false));
+//        answerService.add(new Answer(questionDTO.getAnswer2(), true));
+//        answerService.add(new Answer(questionDTO.getAnswer3(), false));
+//        answerService.add(new Answer(questionDTO.getAnswer4(), false));
+//
+//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer1()).get());
+//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer2()).get());
+//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer3()).get());
+//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer4()).get());
+
+        question.getAnswers().add(new Answer(questionDTO.getAnswer1(), questionDTO.isRight1()));
+        question.getAnswers().add(new Answer(questionDTO.getAnswer2(), questionDTO.isRight2()));
+        question.getAnswers().add(new Answer(questionDTO.getAnswer3(), questionDTO.isRight3()));
+
         questionRepository.save(question);
     }
 

@@ -1,5 +1,6 @@
 package com.example.quizz.controller.Admin;
 
+import com.example.quizz.QuestionDTO;
 import com.example.quizz.entity.Answer;
 import com.example.quizz.entity.Question;
 import com.example.quizz.entity.Quizz;
@@ -11,10 +12,12 @@ import com.example.quizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+
+import javax.validation.Valid;
 
 @Controller
 public class AdminController {
@@ -76,16 +79,29 @@ public class AdminController {
         model.addAttribute("questions", questionService.getAll());
         model.addAttribute("quizz", quizzService.getAll());
 
+        QuestionDTO questionDto = new QuestionDTO();
+        model.addAttribute("question", questionDto);
+
         return "question.html";
     }
 
-    @PostMapping("newquestion")
-    public String addQuestion(Question question, Model model){
-        questionService.add(question);
-        model.addAttribute("questions", questionService.getAll());
-        model.addAttribute("quizz", quizzService.getAll());
+    @PostMapping("question")
+    public String addQuestionDTO(
+            @ModelAttribute("question") @Valid QuestionDTO questionDTO,
+            BindingResult result,
+            Model model) {
 
-        return "question.html";
+        if (result.hasErrors()) {
+            return "question.html";
+        }
+        else {
+            questionService.addDTO(questionDTO);
+            QuestionDTO questionDto = new QuestionDTO();
+            model.addAttribute("question", questionDto);
+            model.addAttribute("quizz", quizzService.getAll());
+            model.addAttribute("questions", questionService.getAll());
+            return "question.html";
+        }
     }
 
     @GetMapping("updateQuestion/{id}")
@@ -100,6 +116,9 @@ public class AdminController {
     public String updateQuestion(Question question, Model model) throws Exception {
         questionService.update(question.getId(), question);
         model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("quizz", quizzService.getAll());
+        QuestionDTO questionDto = new QuestionDTO();
+        model.addAttribute("question", questionDto);
 
         return "question.html";
     }
@@ -108,6 +127,9 @@ public class AdminController {
     public String deleteQuestion(@PathVariable("id") int id, Model model){
         questionService.deleteQuestion(id);
         model.addAttribute("questions", questionService.getAll());
+        model.addAttribute("quizz", quizzService.getAll());
+        QuestionDTO questionDto = new QuestionDTO();
+        model.addAttribute("question", questionDto);
 
         return "question.html";
     }
@@ -123,7 +145,6 @@ public class AdminController {
     @GetMapping("updateUser/{id}")
     public String getUpdateUserView(@PathVariable("id") int id, Model model){
         model.addAttribute("user", userService.getUser(id).get());
-System.out.println(userService.getUser(id).get());
         return "updateUser.html";
     }
 
@@ -147,8 +168,6 @@ System.out.println(userService.getUser(id).get());
     /* Answer */
     @GetMapping("answer")
     public String getAnswerView(Model model){
-
-        System.out.println("GET_azertyuio");
 
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());
@@ -183,8 +202,6 @@ System.out.println(userService.getUser(id).get());
 
     @PostMapping("deleteAnswer/{id}")
     public String deleteAnswer(@PathVariable("id") int id, Model model){
-        System.out.println("azertyuio");
-
         answerService.deleteAnswer(id);
         model.addAttribute("answers", answerService.getAll());
         model.addAttribute("questions", questionService.getAll());
