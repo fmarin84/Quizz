@@ -12,9 +12,8 @@ public class Quizz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title",unique = true,nullable = false,length = 50)
+    @Column(name="title",unique = true,nullable = false)
     private String title;
-
 
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name="quizz_id")
