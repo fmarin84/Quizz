@@ -8,9 +8,9 @@ import com.example.quizz.entity.User;
 import com.example.quizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +62,18 @@ public class UserApi {
             }
 
             return classement;
+        }
+    }
+
+    @GetMapping("user/aswers/{id}")
+    public List<Answer> getAnswersByUser(@PathVariable("id") int id){
+        Optional<User> userOptional = userService.getUser(id);
+
+        if(userOptional.isEmpty()){
+            return  new ArrayList<>();
+        } else {
+            User user = userOptional.get();
+            return user.getAnswerList();
         }
     }
 
