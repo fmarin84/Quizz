@@ -65,15 +65,24 @@ public class UserApi {
         }
     }
 
-    @GetMapping("user/aswers/{id}")
-    public List<Answer> getAnswersByUser(@PathVariable("id") int id){
+    @GetMapping("user/aswers/{id}/quizz/{quizzId}")
+    public List<Answer> getAnswersByUser(@PathVariable("id") int id, @PathVariable("quizzId") int quizzId){
         Optional<User> userOptional = userService.getUser(id);
+        List<Answer> answers = new ArrayList<>();
 
         if(userOptional.isEmpty()){
             return  new ArrayList<>();
         } else {
-            User user = userOptional.get();
-            return user.getAnswerList();
+            List<Answer> userAnswers = userOptional.get().getAnswerList();
+
+            for (Answer answer : userAnswers) {
+                Quizz quizz = answer.getQuestion().getQuizz();
+
+                if(quizz.getId() == quizzId){
+                    answers.add(answer);
+                }
+            }
+            return answers;
         }
     }
 
