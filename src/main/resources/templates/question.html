@@ -59,7 +59,7 @@
         <div class="form-check" >
             <input class="form-check-input" type="checkbox" id="right1" name="right1">
             <label class="form-check-label" for="right1">
-                Réponse juste
+                Vrai
             </label>
         </div>
         <br/>
@@ -73,7 +73,7 @@
         <div class="form-check" >
             <input class="form-check-input" type="checkbox" id="right2" name="right2">
             <label class="form-check-label" for="right2">
-                Réponse juste
+                Vrai
             </label>
         </div>
         <br/>
@@ -87,7 +87,21 @@
         <div class="form-check" >
             <input class="form-check-input" type="checkbox" id="right3" name="right3">
             <label class="form-check-label" for="right3">
-                Réponse juste
+                Vrai
+            </label>
+        </div>
+        <br/>
+
+        <div class="input-group">
+            <span class="input-group-text">Réponse 4</span>
+            <input type="text" name="answer3" aria-label="Titre" th:field="*{answer4}"  class="form-control"/>
+            <p class="error-message"
+               th:each="error: ${#fields.errors('answer4')}" th:text="${error}"></p>
+        </div>
+        <div class="form-check" >
+            <input class="form-check-input" type="checkbox" id="right4" name="right4">
+            <label class="form-check-label" for="right4">
+                Vrai
             </label>
         </div>
         <br/>

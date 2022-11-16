@@ -76,6 +76,7 @@ public class UserService {
             user.setPassword(u.get().getPassword());
             user.setRole(u.get().getRole());
             user.setUsername(u.get().getUsername());
+            user.setAnswerList(u.get().getAnswerList());
             userRepository.save(user);
         } else {
             throw new Exception();

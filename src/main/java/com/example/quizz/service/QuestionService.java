@@ -33,19 +33,10 @@ public class QuestionService {
         question.setTitle(questionDTO.getTitle());
         question.setQuizz(questionDTO.getQuizz());
 
-//        answerService.add(new Answer(questionDTO.getAnswer1(), false));
-//        answerService.add(new Answer(questionDTO.getAnswer2(), true));
-//        answerService.add(new Answer(questionDTO.getAnswer3(), false));
-//        answerService.add(new Answer(questionDTO.getAnswer4(), false));
-//
-//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer1()).get());
-//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer2()).get());
-//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer3()).get());
-//        question.getAnswers().add(answerService.getOneByTitle(questionDTO.getAnswer4()).get());
-
         question.getAnswers().add(new Answer(questionDTO.getAnswer1(), questionDTO.isRight1()));
         question.getAnswers().add(new Answer(questionDTO.getAnswer2(), questionDTO.isRight2()));
         question.getAnswers().add(new Answer(questionDTO.getAnswer3(), questionDTO.isRight3()));
+        question.getAnswers().add(new Answer(questionDTO.getAnswer4(), questionDTO.isRight4()));
 
         questionRepository.save(question);
     }

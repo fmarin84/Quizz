@@ -3,7 +3,6 @@ package com.example.quizz;
 import com.example.quizz.entity.Quizz;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 public class QuestionDTO {
 
@@ -17,9 +16,13 @@ public class QuestionDTO {
     @NotEmpty(message = "Ce champs ne peut pas être vide.")
     private String answer3;
 
+    @NotEmpty(message = "Ce champs ne peut pas être vide.")
+    private String answer4;
+
     private boolean right1;
     private boolean right2;
     private boolean right3;
+    private boolean right4;
 
 
     public String getTitle() {
@@ -62,6 +65,14 @@ public class QuestionDTO {
         this.answer3 = answer3;
     }
 
+    public String getAnswer4() {
+        return answer4;
+    }
+
+    public void setAnswer4(String answer4) {
+        this.answer4 = answer4;
+    }
+
     public boolean isRight1() {
         return right1;
     }
@@ -84,5 +95,13 @@ public class QuestionDTO {
 
     public void setRight3(boolean right3) {
         this.right3 = right3;
+    }
+
+    public boolean isRight4() {
+        return right4;
+    }
+
+    public void setRight4(boolean right4) {
+        this.right4 = right4;
     }
 }
