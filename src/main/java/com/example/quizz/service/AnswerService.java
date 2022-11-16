@@ -60,7 +60,7 @@ public class AnswerService {
 
         Optional<Answer> q = answerRepository.findOneById(id);
         if(q.isPresent()) {
-            //TODO Faire une fonction
+            
             q.get().setTitle(answer.getTitle());
             q.get().setRightWrong(answer.isRightWrong());
             answerRepository.save(answer);

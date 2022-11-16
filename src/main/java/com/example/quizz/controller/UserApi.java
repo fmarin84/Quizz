@@ -46,10 +46,10 @@ public class UserApi {
         Optional<User> userOptional = userService.getUser(id);
 
         int score = 0;
-        HashMap<String, Boolean> classement = new HashMap<>();
+        HashMap<Integer, Boolean> classement = new HashMap<>();
 
         if(userOptional.isEmpty()){
-            return  new HashMap<String,Integer>();
+            return  new HashMap<Integer,Integer>();
         } else {
             User user = userOptional.get();
             List<Answer> answers = user.getAnswerList();
@@ -58,7 +58,7 @@ public class UserApi {
                 Question question = answer.getQuestion();
                 Quizz quizz = question.getQuizz();
 
-                classement.put(quizz.getTitle(), true);
+                classement.put(quizz.getId(), true);
             }
 
             return classement;
