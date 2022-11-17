@@ -26,7 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // The order of the rules matters and the more specific rules should go first.
                 // ne pas oublier le / devant les URLs
                 .antMatchers("/", "/index.html").permitAll()
-                .antMatchers("/", "/**", "/**").permitAll()
                 .antMatchers("/", "/user/registration").permitAll()
                 .antMatchers("/", "/index.html", "/api/user").permitAll()
                 .antMatchers("/", "/index.html", "/api/user/login").permitAll()
